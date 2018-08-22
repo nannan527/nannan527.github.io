@@ -38,7 +38,7 @@
       Quagga.start();
 
       Quagga.onDetected(function (data) {
-        console.log(data)
+        console.log(data.codeResult)
         alert(data.codeResult.code)
       })
 
