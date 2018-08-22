@@ -77,7 +77,7 @@
       }
     }
 
-    // Configure the library and activate it with a license key
+    // 配置库并使用许可证密钥激活它
     const licenseKey = 'ARwrQBZ0Ci8KMiqhIQRtkkMskxbFPLV8VG2FNwEXfDcrDSyUbFQBczsVWKC6N3YdWmP10cxDGEIxZF9rIDFI045A1VvSBlAEBncpdSN5o3tMMNKbw3xwzqhTQQXwQtX6tmXJ17odNtB2HA0SB1fmrrkPvC4ZOMAIFSwdfTt0jDrELcMJQwKkyJ/L5uXBpZWpbKv/FMdS2E5tFitv41vgxGB6SVzjiotrCzPNPoG7096XufU0BqYiKccpg6QBr0iZ337RVI+QQpb7HRluwYiak4VgZTEbXAUSQH7fHHCXLjAfQoyC2B8YGsylAfb1zUAle/TjYfDLmHnhRa/HLxb24Qm/UsrkJ7ziHRxXmmg9n176nRgPs7g4918OIViZoWi3sBDiV7Jt9iY14634cvsKEE/5avcGGaIjnJT2VhMcvWbYxruBy63Ts4jjv4ivp6kOnERsPc/NaIbahGOvVd6gDDmbq6nzT5u8BQ3l6qXZpDbC48lzA0ArvkRM7Fp54n0JCqzaXt94ISqPadkeoiIVN4jZ3+02N3+p/uMv/7W4qtxzAk9eHMiYPRWFTpbbDV9e5uVMkqoJ8737tfu+tOwAstdZ8+vk1X7uXNZ9wj7969m65pKASE8t+tp9SKPSVd+XRVZT5/zDa4iDLvhKXDLY1FHOivSa3VjYPYcPubmzkU1JK6O6n7XDXzSEG0DZCI/eiT6pZbmVhLaKEvUpi0q0vJGwEuiQIN7KEJ/VPx2tDMw8dBASPudcbgbTRLZ2XR51mpvu2yvRHq8KE16uumt7MS7e3/ipIpCaJdot82d0SHKNYH3j2B83bp7mGuraOrHZQUaY8tC4QTkZ';
 
     const engineLocation = "https://unpkg.com/scandit-sdk/build"
@@ -90,21 +90,25 @@
     const scanInput = document.getElementById("scan-input");
     let picker;
 
-    // Create & start the picker
+    // 创建并启动选择器
     ScanditSDK.BarcodePicker.create(scannerContainer)
       .then(barcodePicker => {
         picker = barcodePicker;
-        // Create the settings object to be applied to the scanner
+        //创建要应用到扫描器的settings对象
         const scanSettings = new ScanditSDK.ScanSettings({
           enabledSymbologies: ["ean8", "ean13", "upca", "upce", "code128", "code39"]
         });
         picker.applyScanSettings(scanSettings);
 
+        // 进行扫描
         picker.onScan(scanResult => {
           stopScanning();
           scanInput.value = scanResult.barcodes[0].data;
         });
+        // 扫描报错，弹出错误
         picker.onScanError(error => alert(error.message));
+
+        //继续开始扫描
         picker.resumeScanning();
       })
       .catch(alert);
