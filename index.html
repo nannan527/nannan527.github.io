@@ -20,6 +20,8 @@
       },
       decoder: {
         readers: ["code_128_reader"],
+        halfSample: true,
+        patchSize: "medium", // x-small, small, medium, large, x-large
         debug: {
           drawBoundingBox: false,
           showFrequency: false,
