@@ -23,7 +23,7 @@
     }
 
     .viewport>canvas {
-      float: left;
+      position: absolute;
     }
 
     .input__area {
@@ -50,6 +50,12 @@
       inputStream: {
         name: "Live",
         type: "LiveStream",
+        constraints: {
+          width: { min: 640 },
+          height: { min: 480 },
+          facingMode: "environment",
+          aspectRatio: { min: 1, max: 2 }
+        },
         target: document.querySelector('#J_scand_area')    // Or '#yourElement' (optional)
       },
       decoder: {
