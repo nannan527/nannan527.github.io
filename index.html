@@ -20,25 +20,29 @@
     .viewport>canvas,
     .viewport>video {
       position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       max-width: 100%;
       width: 100%;
     }
 
     .input__area {
-      width: 100%;
+      width: 90%;
       height: 30px;
       line-height: 30px;
       border: 1px solid #999;
       color: #666;
       font-size: 14px;
-      margin-top: 20px;
+      margin: 20px auto;
     }
   </style>
 </head>
 
 <body>
   <div id="J_scand_area" class="viewport"></div>
-  <input type="text" value="" calss="input__area" id="J_input_area">
+  <input type="text" value="" class="input__area" id="J_input_area">
 
   <script src="js/quagga.min.js"></script>
   <script>
