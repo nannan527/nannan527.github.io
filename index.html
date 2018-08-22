@@ -9,6 +9,7 @@
 
 <body>
   <div id="J_scand_area"></div>
+  <input type="text" id="J_input_area">
 
   <script src="js/quagga.min.js"></script>
   <script>
@@ -19,15 +20,29 @@
         target: document.querySelector('#J_scand_area')    // Or '#yourElement' (optional)
       },
       decoder: {
-        readers: ["code_128_reader"]
+        readers: ["code_128_reader"],
+        debug: {
+          drawBoundingBox: false,
+          showFrequency: false,
+          drawScanline: false,
+          showPattern: false
+        },
+        multiple: false
       }
     }, function (err) {
+      console.log(err);
       if (err) {
         console.log(err);
         return
       }
       console.log("Initialization finished. Ready to start");
       Quagga.start();
+
+      Quagga.onDetected(function (data) {
+        console.log(data)
+        alert(data.codeResult.code)
+      })
+
     });
   </script>
 </body>
