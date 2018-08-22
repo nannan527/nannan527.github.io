@@ -19,23 +19,13 @@
         target: document.querySelector('#J_scand_area')    // Or '#yourElement' (optional)
       },
       decoder: {
-        readers: ["upc_reader"],
-        halfSample: true,
-        patchSize: "medium", // x-small, small, medium, large, x-large
-        // debug: {
-        //   showCanvas: false,
-        //   showPatches: false,
-        //   showFoundPatches: false,
-        //   showSkeleton: false,
-        //   showLabels: false,
-        //   showPatchLabels: false,
-        //   showRemainingPatchLabels: false,
-        //   boxFromPatches: {
-        //     showTransformed: false,
-        //     showTransformedBox: false,
-        //     showBB: false
-        //   }
-        // },
+        readers: ["code_128_reader"],
+        debug: {
+          drawBoundingBox: false,
+          showFrequency: false,
+          drawScanline: false,
+          showPattern: false
+        },
         multiple: false
       }
     }, function (err) {
