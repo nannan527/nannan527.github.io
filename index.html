@@ -1,1 +1,86 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="renderer" content="webkit"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="Cache-Control" content="private"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>生产模式</title><link href="./css/style.css" rel="stylesheet"></head><body><div id="app"></div><script type="text/javascript" src="./js/vendor.bundle.js"></script><script type="text/javascript" src="./js/index.bundle.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scandit Web SDK</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
+
+    <!-- Add the library, as explained on http://docs.scandit.com/stable/web/index.html -->
+    <script src="https://unpkg.com/scandit-sdk"></script>
+</head>
+
+<body onclick="console.log('body clicked')">
+    <div id="scandit-barcode-picker"></div>
+    <div id="input-container">
+        <input id="scan-input" type="text" placeholder="Search">
+        <button id="scan" onclick="scan()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="127" height="127" viewBox="0 0 127 127"><g fill="none" fill-rule="evenodd"><g class="base" fill="#000000"><g transform="translate(16 70)"><polygon points="26 37 43 37 43 0 26 0"/><polygon points="85 37 94 37 94 0 85 0"/><polygon points="0 37 9 37 9 0 0 0"/><polygon points="11 37 20 37 20 0 11 0"/><polygon points="74 37 83 37 83 0 74 0"/><polygon points="63 37 72 37 72 0 63 0"/><polygon points="46 37 55 37 55 0 46 0"/></g><g transform="translate(16 20)"><polygon points="26 37 43 37 43 0 26 0"/><polygon points="85 37 94 37 94 0 85 0"/><polygon points="0 37 9 37 9 0 0 0"/><polygon points="11 37 20 37 20 0 11 0"/><polygon points="74 37 83 37 83 0 74 0"/><polygon points="63 37 72 37 72 0 63 0"/><polygon points="46 37 55 37 55 0 46 0"/></g><g fill-rule="nonzero"><polygon points="126 0 94 0 94 3.693 122.307 3.693 122.307 32 126 32"/><polygon points="3.693 3.693 32 3.693 32 0 0 0 0 32 3.693 32"/><polygon points="122.307 123.307 94 123.307 94 127 126 127 126 95 122.307 95"/><polygon points="0 127 32 127 32 123.307 3.693 123.307 3.693 95 0 95"/></g></g><polygon class="scanline" fill="#2EC1CE" fill-rule="nonzero" points="0 62 0 65 127 65 127 62"/></g></svg>
+        </button>
+    </div>
+
+    <script>
+        function scan() {
+            startScanning();
+        }
+
+        function showScanner() {
+            scannerContainer.style.opacity = "1";
+            scannerContainer.style.zIndex = "1";
+        }
+
+        function hideScanner() {
+            scannerContainer.style.opacity = "0";
+            scannerContainer.style.zIndex = "-1";
+        }
+
+        function startScanning() {
+            showScanner();
+            if (picker) {
+                picker.resumeScanning();
+            }
+        }
+
+        function stopScanning() {
+            hideScanner();
+            if (picker) {
+                picker.pauseScanning();
+            }
+        }
+
+        // Configure the library and activate it with a license key
+        const licenseKey = "AfHbwFl0RYMJD5nC6yqXn3I14pFUOfSbdkMX15QfaWyABRdB6UAUQo8mnL0cPHDyBmCY8b5CdQRNQcFSezk06pFeXzxHU4CB2T5GFnIvxzZFfA+7bmbH2ZRGUYZKb+Ai1ypARy9vXlIGVjulQWLI3/MQd9AsXVkZgVrZC4JnwekaXQnN3kX9TEJFkG50ecZRL2aIiUp/9TLzPLJtfXUBh6pMp0B8AhhGuGPP7TptuOvnQCsMokn2NKpG2jgSf7eDyHhGGCIo1+lHTnuY41+B5Yxe2w1ESMuFKVeGDtRYcwvSfcj4Nkg7cg5HgH6wYJA+dmm0hPtGKSVPWvPdiXckFrZgIAwKcTHkS3Mjdy95mCYUYeRqJHoaDmZqZwDIRfNayWGDn6hmpKl7Dsbju3TvJYlJLjJLfUL+i3bN8ux5D2ciR9f9k2MJX+lG7TmFbcj7Pkvox7dFLEviA+ty2SYcMOYCwReve6p7nDg+6QLvI2cKFhY8ysov+LCB18Vnu6Jy7UsV1SAdGDdwG3xTj1iYIRE7AHk3Z4ONOgOD6YwsbL3KJpHWrOQ1DhwAbUK7kw6VSJ3DB2JmM2fzzDiH9Pag7CG7kcE/yorgUXI6VG5jagQUX8mAlzke5W0dKd1OWdkAnqDDX2je5fIH/dM1VnJ4WjtfN8nEUWBO0UVhF2KghPP47nJ+BHUMoElrKKXCeXQ3ecRxZmVKmHHBLsFw3+TiRK6PBau+7hCQbPhoBLjBj/1qAZBkRTi6RKhZJ3lDUbzWYM7F3g/8DgF1xXBTbUuci1LLa/o3xVLKe/UUtfiyUIo2cwBcrn1h4nw5y0NVbALtwtI7iOtiWlF1Xyis6VZdY5OHrKiK+zu/ThS9eAUpqxsdLpMmG75QX1oWNSJ3D9gdjv7mz+D/3O3nnT1OmhNQ7DpqRXPWGfKtL6/kHK1OcwqGURwym6dSmwFT0vBmrceg/d3OZMd400dqhQBkzDv8qw4v/LzFAE+9z+SEOOIWRad0kyCXa407vKouCA8z4eNl0QmTMUB8kvSqwwpJM8JClpYwJqiiA+WQ9bT0m6SQw4/82ukWN5ZeSc3Po/PzuSGYue9NTNSRk7cpkNiUxVB+1g21PubAnXRXEULUhANKu/NpEAjotdgoGaYvKWy8q1+nLas=";
+
+        const engineLocation = "https://unpkg.com/scandit-sdk/build"
+
+        ScanditSDK.configure(licenseKey, { engineLocation: engineLocation });
+
+        const scannerContainer = document.getElementById("scandit-barcode-picker");
+        scannerContainer.style.opacity = "0";
+        scannerContainer.style.zIndex = "-1";
+        const scanInput = document.getElementById("scan-input");
+        let picker;
+
+        // Create & start the picker
+        ScanditSDK.BarcodePicker.create(scannerContainer)
+            .then(barcodePicker => {
+                picker = barcodePicker;
+                // Create the settings object to be applied to the scanner
+                const scanSettings = new ScanditSDK.ScanSettings({
+                    enabledSymbologies: ["ean8", "ean13", "upca", "upce", "code128", "code39"]
+                });
+                picker.applyScanSettings(scanSettings);
+
+                picker.onScan(scanResult => {
+                    stopScanning();
+                    scanInput.value = scanResult.barcodes[0].data;
+                });
+                picker.onScanError(error => alert(error.message));
+                picker.resumeScanning();
+            })
+            .catch(alert);
+    </script>
+</body>
+
+</html>
