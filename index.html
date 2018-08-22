@@ -23,14 +23,26 @@
       max-width: 100%;
       width: 100%;
     }
+
+    .input__area {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #999;
+      color: #666;
+      font-size: 14px;
+    }
   </style>
 </head>
 
 <body>
   <div id="J_scand_area" class="viewport"></div>
+  <input type="text" value="" calss="input__area" id="J_input_area">
 
   <script src="js/quagga.min.js"></script>
   <script>
+    var lastResult = null;
+
     Quagga.init({
       inputStream: {
         name: "Live",
@@ -87,9 +99,15 @@
         }
       });
 
-      Quagga.onDetected(function (data) {
-        console.log(data.codeResult)
-        alert(data.codeResult.code)
+      Quagga.onDetected(function (result) {
+        console.log(result.codeResult)
+
+        var code = result.codeResult.code;
+        // alert(data.codeResult.code)
+        if (lastResult !== code) {
+          lastResult = code;
+          document.querySelector('#J_input_area').value = lastResult;
+        }
       })
 
     });
